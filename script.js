@@ -1,3 +1,4 @@
+
 // Initialize the map
 var mymap = L.map('map').setView([51.505, -0.09], 13);
 
@@ -19,7 +20,8 @@ var customIcon = L.divIcon({
 
 
 const ipAddressFormat = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
-const IPIFY_API_KEY = config.IPIFY_API_KEY;
+const a0832fisjf952fesf5853 = "at_rUzGrVs8fkA6Upfp38tDWV2G08bdV";
+/*import API_KEY from "./config.js";*/
 
 window.onload = function () {
     var submitButton = document.getElementById("submit-button");
@@ -28,7 +30,7 @@ window.onload = function () {
     var rrlm = document.getElementById("eRLR");
     rrlm.addEventListener("click", emergencyKillSwitch);
 
-    alert("This page is currently limited to 10 requests every 24 hours.");
+    alert("This page is currently limited to 3 requests every 24 hours.");
 }
 
 let ipAddress;
@@ -52,18 +54,17 @@ let { successClickCount = 0, isButtonDisabled = false } = storedData;
 
 var url;
 /*let successClickCount = 0;*/
-const maxClicks = 10;
+const maxClicks = 3;
 /*let isButtonDisabled = false;*/
 
 
 function checkIPAddress() {
     var userInput = document.getElementById("user-input");
-    const maxClicks = 10;
     if (userInput.value.match(ipAddressFormat)) {
         console.log(userInput.value);
         successClickCount++;
 
-        url = "https://geo.ipify.org/api/v2/country,city?apiKey=" + config.IPIFY_API_KEY + "&ipAddress=" + userInput.value;
+        url = "https://geo.ipify.org/api/v2/country,city?apiKey=" +a0832fisjf952fesf5853 +"&ipAddress=" + userInput.value;
 
         fetch(url)
             .then((response) => response.json())
@@ -99,7 +100,7 @@ function checkIPAddress() {
         return false;
     }
 
-    if (successClickCount == maxClicks) {
+    if (successClickCount >= maxClicks) {
         disableButtonFor24Hours();
         alert('Usage limit for day reached');
     }
@@ -163,4 +164,3 @@ function checkButtonStatus() {
         localStorage.clear();
         location.reload();
     }
-
